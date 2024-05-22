@@ -19,4 +19,5 @@ git config --global alias.comrd 'commit --reedit-message=HEAD'
 git config --global alias.comrs 'commit --reuse-message='
 git config --global alias.c commit
 git config --global alias.p push
+git config --global alias.a add
 ``` 
