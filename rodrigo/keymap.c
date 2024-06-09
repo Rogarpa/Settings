@@ -83,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TOGGLE_ALTTAB, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F6,                     KC_MINS, KC_EQL, KC_LBRC,  KC_RBRC, KC_PIPE, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LGUI, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), LGUI(LCTL(KC_LEFT)) , RALT(LCTL(KC_DOWN)), RALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)), XXXXXXX,
+     KC_LSFT, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)), XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          RCTL(KC_F), KC_TRNS, XXXXXXX,    XXXXXXX, RAISE, KC_RALT
                                       //|--------------------------|  |--------------------------|
@@ -610,9 +610,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case TOGGLE_ALTTAB:
-            if (record->event.pressed) {
-                is_tab_toggled ^= 1;
+            if (record->event.pressed) {                    
                 if (is_tab_toggled) { 
+                    is_tab_toggled ^= 1;
                     register_code(KC_LALT);
                     register_code(KC_TAB);
                     unregister_code(KC_TAB);                                                                                                                                                  
