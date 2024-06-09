@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //---------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TD(TD_CAPLOCK), KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                 KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, MT(MOD_LSFT, KC_ENT),
   //---------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                            TD(TD_LGUICTRL), LOWER, MT(MOD_LALT,KC_SPC),     KC_SPC, RAISE, KC_LALT
+                            TD(TD_LGUICTRL), LOWER, KC_ENT,              KC_SPC, RAISE, KC_LALT
                                       //|--------------------------|  |--------------------------|
 
 
@@ -80,22 +80,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
      KC_DEL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_PWR, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F6,                       KC_MINS, KC_EQL, KC_LBRC,  KC_RBRC, KC_PIPE, KC_BSLS,
+     LALT(KC_TAB), KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F6,                     KC_MINS, KC_EQL, KC_LBRC,  KC_RBRC, KC_PIPE, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LGUI, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                     KC_INS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     KC_LGUI, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), LGUI(LCTL(KC_RIGHT)) , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         RCTL(KC_F), KC_TRNS, XXXXXXX,    XXXXXXX, RAISE, XXXXXXX
+                                         RCTL(KC_F), KC_TRNS, XXXXXXX,    XXXXXXX, RAISE, KC_RALT
                                       //|--------------------------|  |--------------------------|
   ),
 
 
   [_RAISE] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MUTE,
+     KC_PSCR, KC_F1  , KC_F2   , KC_F3 , KC_F4  , KC_F5  ,                      KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MUTE,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX , KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_DEL,
+     XXXXXXX, KC_F6  , KC_F7   , KC_F8 , KC_F9  , KC_F10 ,                       XXXXXXX , KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX ,KC_HOME,  KC_PGDN, KC_PGUP, KC_END, XXXXXXX,
+     KC_LSFT, KC_F11 , KC_F12  , KC_F13 , KC_F14 , KC_F15 ,                      XXXXXXX ,KC_HOME,  KC_PGDN, KC_PGUP, KC_END, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LCTL, LOWER, XXXXXXX,    XXXXXXX, KC_TRNS, XXXXXXX
                                       //|--------------------------|  |--------------------------|
@@ -103,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-     XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,                       XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+     KC_GRV, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,                       XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PWR,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      XXXXXXX, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD,                       XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   RESET,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
