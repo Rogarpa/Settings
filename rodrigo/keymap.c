@@ -19,9 +19,11 @@ enum layers {
   _QWERTY,
   _LOWER,
   _RAISE,
+  _HANDY,
   _ADJUST,
   _GAMING,
   _GAMING2
+
 };
 
 enum custom_keycodes {
@@ -30,6 +32,12 @@ enum custom_keycodes {
   RAISE,
   ADJUST,
   TOGGLE_ALTTAB,
+  TOGGLE_WIN_MOVE_UP,
+  TOGGLE_WIN_MOVE_DOWN,
+  TOGGLE_WIN_MOVE_LEFT,
+  TOGGLE_WIN_MOVE_RIGHT,
+  OPEN_QS_MARK,
+  HANDY,
   //RGBRST,
     //MACRO1,
   //MACRO2,
@@ -68,9 +76,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      KC_TAB,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                          KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,
   //---------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     TD(TD_CAPLOCK), KC_Z,            KC_X,    KC_C,    KC_V,    KC_B,                 KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, MT(MOD_LSFT, KC_ENT),
+     TD(TD_CAPLOCK), KC_Z,            KC_X,    KC_C,    KC_V,    KC_B,                 KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, KC_ENT,
   //---------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                            TD(TD_LGUICTRL), LOWER, MT(MOD_LALT,KC_SPC),              KC_SPC, RAISE, KC_LALT
+                            TD(TD_LGUICTRL), LOWER, HANDY,              KC_SPC, RAISE, KC_LALT
                                       //|--------------------------|  |--------------------------|
 
 
@@ -82,9 +90,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TOGGLE_ALTTAB, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F6,                     KC_MINS, KC_EQL, KC_LBRC,  KC_RBRC, KC_PIPE, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)), XXXXXXX,
+     KC_LSFT, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)), OPEN_QS_MARK,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         RCTL(KC_F), KC_TRNS, XXXXXXX,    XXXXXXX, RAISE, KC_RALT
+                                         RCTL(KC_F), KC_TRNS, HANDY,    XXXXXXX, RAISE, KC_RALT
                                       //|--------------------------|  |--------------------------|
   ),
 
@@ -100,7 +108,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           KC_LCTL, LOWER, XXXXXXX,    XXXXXXX, KC_TRNS, XXXXXXX
                                       //|--------------------------|  |--------------------------|
   ),
-
+    
+  [_HANDY] = LAYOUT(
+  //|-----------------------------------------------------|                    |-----------------------------------------------------|
+     TO(_QWERTY),  KC_1,    LSFT(LALT(LCTL(KC_DOWN))), LSFT(LALT(LCTL(KC_UP))),    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_BSPC,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+     TOGGLE_ALTTAB, TOGGLE_WIN_MOVE_LEFT, TOGGLE_WIN_MOVE_DOWN, TOGGLE_WIN_MOVE_UP, TOGGLE_WIN_MOVE_RIGHT,XXXXXXX,                          XXXXXXX , KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_DEL,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+     KC_LSFT, LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)),XXXXXXX,                  RALT(KC_N), LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)), XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                         RCTL(KC_F), KC_TRNS, KC_TRNS,    XXXXXXX, RAISE, KC_RALT
+                                      //|--------------------------|  |--------------------------|
+  ),
   [_ADJUST] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
      KC_GRV, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,                       XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_PWR,
@@ -118,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      KC_CAPS,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                          KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,
   //---------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, KC_Z,   KC_X,    KC_C,    KC_V,    TD(TD_GAMING_LAYER),                  KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, KC_ENT,
+     KC_LSFT, KC_Z,   KC_X,    KC_C,    KC_H,    TD(TD_GAMING_LAYER),                  KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, KC_ENT,
   //---------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          KC_LCTL, KC_SPC, MT(MOD_LALT,TO(_QWERTY)),     TO(_QWERTY), RAISE, KC_RALT
                                       //|--------------------------|  |--------------------------|
@@ -213,7 +232,7 @@ void gaming_layer_finished(qk_tap_dance_state_t *state, void *user_data) {
             register_code16(KC_B);
             break;
         case TD_3_TAP:
-            register_code16(TO(_QWERTY));
+            layer_on(_GAMING);
             break;
         default:
             break;
@@ -230,6 +249,7 @@ void gaming_layer_reset(qk_tap_dance_state_t *state, void *user_data) {
             unregister_code16(KC_B);
             break;
         case TD_3_TAP:
+            layer_off(_GAMING);
             break;
         default:
             break;
@@ -509,16 +529,16 @@ bool oled_task_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static bool is_tab_toggled;
+    static bool is_win_toggled;
   switch (keycode) {
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
-        // update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_LOWER);
-        // update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-        unregister_code(KC_LALT);
-        is_tab_toggled ^= 1;
+        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+        
 
       }
       return false;
@@ -531,6 +551,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
       return false;
+    case HANDY:
+      if (record->event.pressed) {
+        layer_on(_HANDY);
+      } else {
+        layer_off(_HANDY);
+      }
+        if(is_tab_toggled) {
+            is_tab_toggled = false;
+            unregister_code(KC_LALT);
+        }
+        if(is_win_toggled) {
+            is_win_toggled = false;
+            unregister_code(KC_LGUI);
+        }
+      return false;
     case ADJUST:
         if (record->event.pressed) {
           layer_on(_ADJUST);
@@ -540,8 +575,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case TOGGLE_ALTTAB:
             if (record->event.pressed) {                    
-                if (is_tab_toggled) { 
-                    is_tab_toggled ^= 1;
+                if (!is_tab_toggled) { 
+                    is_tab_toggled = true;
                     register_code(KC_LALT);
                     register_code(KC_TAB);
                     unregister_code(KC_TAB);                                                                                                                                                  
@@ -551,7 +586,63 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
         return false;
-        
+    case TOGGLE_WIN_MOVE_UP:
+            if (record->event.pressed) {                    
+                if (!is_win_toggled) { 
+                    is_win_toggled = true;
+                    register_code(KC_LGUI);
+                    register_code(KC_UP);
+                    unregister_code(KC_UP);                                                                                                                                                  
+                } else { 
+                    register_code(KC_UP);
+                    unregister_code(KC_UP);
+                }
+            }
+        return false;
+    case TOGGLE_WIN_MOVE_DOWN:
+            if (record->event.pressed) {                    
+                if (!is_win_toggled) { 
+                    is_win_toggled = true;
+                    register_code(KC_LGUI);
+                    register_code(KC_DOWN);
+                    unregister_code(KC_DOWN);                                                                                                                                                  
+                } else { 
+                    register_code(KC_DOWN);
+                    unregister_code(KC_DOWN);
+                }
+            }
+        return false;
+    case TOGGLE_WIN_MOVE_RIGHT:
+            if (record->event.pressed) {                    
+                if (!is_win_toggled) { 
+                    is_win_toggled = true;
+                    register_code(KC_LGUI);
+                    register_code(KC_RIGHT);
+                    unregister_code(KC_RIGHT);                                                                                                                                                  
+                } else { 
+                    register_code(KC_RIGHT);
+                    unregister_code(KC_RIGHT);
+                }
+            }
+        return false;
+    case TOGGLE_WIN_MOVE_LEFT:
+            if (record->event.pressed) {                    
+                if (!is_win_toggled) { 
+                    is_win_toggled = true;
+                    register_code(KC_LGUI);
+                    register_code(KC_LEFT);
+                    unregister_code(KC_LEFT);                                                                                                                                                  
+                } else { 
+                    register_code(KC_LEFT);
+                    unregister_code(KC_LEFT);
+                }
+            }
+        return false;
+    case OPEN_QS_MARK:
+            if (record->event.pressed) {                    
+                SEND_STRING("¿");
+                }
+        return false;
 //        case MACRO1:
 //    if (record->event.pressed) {  
 //            SEND_STRING("Aqui pones lo que quieras en el macro 1");
