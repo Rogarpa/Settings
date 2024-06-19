@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
      KC_DEL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     XXXXXXX, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F6,                         KC_MINS, KC_EQL, KC_LBRC,  KC_RBRC, KC_PIPE, KC_BSLS,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_F6,                         KC_MINS, KC_EQL, KC_LBRC,  KC_RBRC, KC_PIPE, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      KC_LSFT, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OPEN_QS_MARK,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -111,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
   [_HANDY] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-     TO(_QWERTY),  XXXXXXX,    LSFT(LALT(LCTL(KC_DOWN))), LSFT(LALT(LCTL(KC_UP))),    XXXXXXX,    XXXXXXX,                         XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX,
+     KC_PWR,  XXXXXXX,    LSFT(LALT(LCTL(KC_DOWN))), LSFT(LALT(LCTL(KC_UP))),    XXXXXXX,    XXXXXXX,                         XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TG_ALTTAB, TG_WIN_MOVE_LEFT, TG_WIN_MOVE_DOWN, TG_WIN_MOVE_UP, TG_WIN_MOVE_RIGHT,XXXXXXX,                          XXXXXXX , KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
