@@ -31,11 +31,11 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
-  TOGGLE_ALTTAB,
-  TOGGLE_WIN_MOVE_UP,
-  TOGGLE_WIN_MOVE_DOWN,
-  TOGGLE_WIN_MOVE_LEFT,
-  TOGGLE_WIN_MOVE_RIGHT,
+  TG_ALTTAB,
+  TG_WIN_MOVE_UP,
+  TG_WIN_MOVE_DOWN,
+  TG_WIN_MOVE_LEFT,
+  TG_WIN_MOVE_RIGHT,
   OPEN_QS_MARK,
   HANDY,
   //RGBRST,
@@ -88,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
      KC_DEL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     TOGGLE_ALTTAB, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F6,                     KC_MINS, KC_EQL, KC_LBRC,  KC_RBRC, KC_PIPE, KC_BSLS,
+     XXXXXXX, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F6,                         KC_MINS, KC_EQL, KC_LBRC,  KC_RBRC, KC_PIPE, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)), OPEN_QS_MARK,
+     KC_LSFT, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OPEN_QS_MARK,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          RCTL(KC_F), KC_TRNS, HANDY,    XXXXXXX, RAISE, KC_RALT
                                       //|--------------------------|  |--------------------------|
@@ -111,13 +111,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
   [_HANDY] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-     TO(_QWERTY),  KC_1,    LSFT(LALT(LCTL(KC_DOWN))), LSFT(LALT(LCTL(KC_UP))),    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_BSPC,
+     TO(_QWERTY),  XXXXXXX,    LSFT(LALT(LCTL(KC_DOWN))), LSFT(LALT(LCTL(KC_UP))),    XXXXXXX,    XXXXXXX,                         XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     TOGGLE_ALTTAB, TOGGLE_WIN_MOVE_LEFT, TOGGLE_WIN_MOVE_DOWN, TOGGLE_WIN_MOVE_UP, TOGGLE_WIN_MOVE_RIGHT,XXXXXXX,                          XXXXXXX , KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_DEL,
+     TG_ALTTAB, TG_WIN_MOVE_LEFT, TG_WIN_MOVE_DOWN, TG_WIN_MOVE_UP, TG_WIN_MOVE_RIGHT,XXXXXXX,                          XXXXXXX , KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)),XXXXXXX,                  RALT(KC_N), LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)), XXXXXXX,
+     KC_LSFT, LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)),XXXXXXX,                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         RCTL(KC_F), KC_TRNS, KC_TRNS,    XXXXXXX, RAISE, KC_RALT
+                                         XXXXXXX, KC_TRNS, KC_TRNS,    XXXXXXX, RAISE, XXXXXXX
                                       //|--------------------------|  |--------------------------|
   ),
   [_ADJUST] = LAYOUT(
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      KC_CAPS,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                          KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,
   //---------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, KC_Z,   KC_X,    KC_C,    KC_H,    TD(TD_GAMING_LAYER),                  KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, KC_ENT,
+     KC_LSFT, KC_Z,   KC_X,    KC_H,    KC_V,    TD(TD_GAMING_LAYER),                  KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, KC_ENT,
   //---------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          KC_LCTL, KC_SPC, MT(MOD_LALT,TO(_QWERTY)),     TO(_QWERTY), RAISE, KC_RALT
                                       //|--------------------------|  |--------------------------|
@@ -573,7 +573,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_ADJUST);
         }
         return false;
-    case TOGGLE_ALTTAB:
+    case TG_ALTTAB:
             if (record->event.pressed) {                    
                 if (!is_tab_toggled) { 
                     is_tab_toggled = true;
@@ -586,7 +586,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
         return false;
-    case TOGGLE_WIN_MOVE_UP:
+    case TG_WIN_MOVE_UP:
             if (record->event.pressed) {                    
                 if (!is_win_toggled) { 
                     is_win_toggled = true;
@@ -599,7 +599,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
         return false;
-    case TOGGLE_WIN_MOVE_DOWN:
+    case TG_WIN_MOVE_DOWN:
             if (record->event.pressed) {                    
                 if (!is_win_toggled) { 
                     is_win_toggled = true;
@@ -612,7 +612,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
         return false;
-    case TOGGLE_WIN_MOVE_RIGHT:
+    case TG_WIN_MOVE_RIGHT:
             if (record->event.pressed) {                    
                 if (!is_win_toggled) { 
                     is_win_toggled = true;
@@ -625,7 +625,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
         return false;
-    case TOGGLE_WIN_MOVE_LEFT:
+    case TG_WIN_MOVE_LEFT:
             if (record->event.pressed) {                    
                 if (!is_win_toggled) { 
                     is_win_toggled = true;
