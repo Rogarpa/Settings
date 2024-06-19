@@ -640,7 +640,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     case OPEN_QS_MARK:
             if (record->event.pressed) {                    
-                SEND_STRING("¿");
+                register_code(KC_LCTL);
+                register_code(KC_LSFT);
+                register_code(KC_U);
+                unregister_code(KC_U);
+                unregister_code(KC_LCTL);
+                unregister_code(KC_LSFT);
+                SEND_STRING("00BF");
+                register_code(KC_ENT);
+                unregister_code(KC_ENT);
+                }else{
+                    break;
                 }
         return false;
 //        case MACRO1:
