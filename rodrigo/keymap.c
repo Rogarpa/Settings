@@ -41,7 +41,6 @@ enum {
     TD_CAPLOCK,
     TD_LGUICTRL,
     TD_ESC_FORGAMING,
-    AALT_LP,
     TD_GAMING_LAYER
 
 };
@@ -169,76 +168,6 @@ td_state_t cur_dance(qk_tap_dance_state_t *state) {
 
 // Handle the possible states for each tapdance keycode you define:
 
-void multitap_finished(qk_tap_dance_state_t *state, void *user_data, uint16_t list_of_keycodes[]) {
-    td_state = cur_dance(state);
-    switch (td_state) {
-        case TD_1_TAP:
-            register_code16(list_of_keycodes[0]);
-            break;
-        case TD_1_HOLD:
-            register_code16(list_of_keycodes[1]);
-            break;
-        case TD_2_TAP:
-            register_code16(list_of_keycodes[2]);
-            break;
-        case TD_2_HOLD:
-            register_code16(list_of_keycodes[3]);
-        case TD_3_TAP:
-            register_code16(list_of_keycodes[4]);
-            break;
-        case TD_3_HOLD:
-            register_code16(list_of_keycodes[5]);
-        default:
-            break;
-    }
-}
-
-void multitap_reset(qk_tap_dance_state_t *state, void *user_data, uint16_t list_of_keycodes[]) {
-    switch (td_state) {
-        case TD_1_TAP:
-            unregister_code16(list_of_keycodes[0]);
-            break;
-        case TD_1_HOLD:
-            unregister_code16(list_of_keycodes[1]);
-            break;
-        case TD_2_TAP:
-            unregister_code16(list_of_keycodes[2]);
-            break;
-        case TD_2_HOLD:
-            unregister_code16(list_of_keycodes[3]);
-        case TD_3_TAP:
-            unregister_code16(list_of_keycodes[4]);
-            break;
-        case TD_3_HOLD:
-            unregister_code16(list_of_keycodes[5]);
-        default:
-            break;
-    }
-}
-
-
-void aaltlp_finished(qk_tap_dance_state_t *state, void *user_data) {
-    td_state = cur_dance(state);
-    switch (td_state) {
-        case TD_2_TAP: // Allow nesting of 2 parens `((` within tapping term
-            layer_on(_GAMING);
-            break;
-        case TD_2_HOLD: // Allow nesting of 2 parens `((` within tapping term
-            register_code16(KC_0);
-            break;
-        default:
-            break;
-    }
-} 
-
-void aaltlp_reset(qk_tap_dance_state_t *state, void *user_data) {
-    switch (td_state) {
-        
-        default:
-            break;
-    }
-}
-
 void escgaming_finished(qk_tap_dance_state_t *state, void *user_data) {
     td_state = cur_dance(state);
     switch (td_state) {
@@ -284,7 +213,7 @@ void gaming_layer_finished(qk_tap_dance_state_t *state, void *user_data) {
             register_code16(KC_B);
             break;
         case TD_3_TAP:
-            register_code16(TO(QWERTY));
+            register_code16(TO(_QWERTY));
             break;
         default:
             break;
@@ -300,16 +229,16 @@ void gaming_layer_reset(qk_tap_dance_state_t *state, void *user_data) {
         case TD_1_HOLD:
             unregister_code16(KC_B);
             break;
+        case TD_3_TAP:
+            break;
         default:
             break;
     }
 } 
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for ;, twice for :
     [TD_CAPLOCK] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     [TD_LGUICTRL] = ACTION_TAP_DANCE_DOUBLE(KC_LCTL, KC_LGUI),
-    [AALT_LP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, aaltlp_finished, aaltlp_reset),
     [TD_ESC_FORGAMING] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, escgaming_finished, escgaming_reset),
     [TD_GAMING_LAYER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, gaming_layer_finished, gaming_layer_reset)
 };
