@@ -5,7 +5,7 @@ enum sofle_layers {
     _QWERTY,
     _COLEMAK,
     _LOWER,
-    _ADJUST2,
+    _THIRD,
     _RAISE,
     _ADJUST,
 };
@@ -14,7 +14,7 @@ enum custom_keycodes {
     KC_QWERTY = SAFE_RANGE,
     KC_COLEMAK,
     KC_LOWER,
-    KC_ADJUST2,
+    KC_THIRD,
     KC_RAISE,
     KC_ADJUST,
     KC_PRVWD,
@@ -93,13 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   RGB_MOD,  KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, _______,       _______, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
                        _______, _______, _______, KC_TRNS, _______,       _______, KC_RAISE, _______, _______, _______
 ),
-[_ADJUST2] = LAYOUT(
-XXXXXXX , KC_0,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-RESET  , XXXXXXX,KC_QWERTY,KC_COLEMAK,CG_TOGG,XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-RGB_TOG , XXXXXXX,CG_TOGG, XXXXXXX,    XXXXXXX,  XXXXXXX,                     XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
-RGB_MOD , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
-                _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
-),
+
 /* RAISE
  * ,----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
@@ -120,6 +114,13 @@ RGB_MOD , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX,
   _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, KC_CAPS,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
   _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND,   XXXXXXX, _______,
                          _______, _______, _______, KC_LOWER, _______,       _______, KC_TRNS, _______, _______, _______
+),
+[_THIRD] = LAYOUT(
+XXXXXXX , KC_0,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+RESET  , XXXXXXX,KC_QWERTY,KC_COLEMAK,CG_TOGG,XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+RGB_TOG , XXXXXXX,CG_TOGG, XXXXXXX,    XXXXXXX,  XXXXXXX,                     XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
+RGB_MOD , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
+                _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -201,7 +202,7 @@ static void print_status_narrow(void) {
         case _ADJUST:
             oled_write_P(PSTR("Adj\n"), false);
             break;
-        case _ADJUST2:
+        case _THIRD:
             oled_write_P(PSTR("Adj2\n"), false);
             break;
         default:
@@ -230,6 +231,15 @@ bool oled_task_user(void) {
 
 #endif
 
+// Setting ADJUST layer RGB back to default
+void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
+  if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
+    layer_on(_THIRD);
+  } else {
+    layer_off(_THIRD);
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_QWERTY:
@@ -243,28 +253,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case KC_LOWER:
+            SEND_STRING("L");
             if (record->event.pressed) {
                 layer_on(_LOWER);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST2);
+                if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
+                    SEND_STRING("ont");
+                    layer_on(_THIRD);
+                } else {
+                    layer_off(_THIRD);
+                }
             } else {
                 layer_off(_LOWER);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST2);
-            }
-            return false;
-        case KC_ADJUST2:
-            if (record->event.pressed) {
-                layer_on(_ADJUST2);
-            } else {
-                layer_off(_ADJUST2);
+                if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
+                    SEND_STRING("ont");
+                    layer_on(_THIRD);
+                } else {
+                    layer_off(_THIRD);
+                }
+
             }
             return false;
         case KC_RAISE:
+            SEND_STRING("R");
             if (record->event.pressed) {
                 layer_on(_RAISE);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST2);
+                if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
+                    layer_off(_RAISE);
+                    layer_on(_THIRD);
+                } 
+                else {
+                    layer_off(_THIRD);
+                }
+
             } else {
+                layer_off(_THIRD);
                 layer_off(_RAISE);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST2);
+                
+                // if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
+                //     SEND_STRING("ont");
+                //     layer_on(_THIRD);
+                // } else {
+                //     layer_off(_THIRD);
+                // }
+
+            }
+            return false;
+        case KC_THIRD:
+            if (record->event.pressed) {
+                layer_on(_THIRD);
+            } else {
+                layer_off(_THIRD);
             }
             return false;
         case KC_ADJUST:
@@ -398,14 +436,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-// Setting ADJUST layer RGB back to default
-void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
-  if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
-    layer_on(layer3);
-  } else {
-    layer_off(layer3);
-  }
-}
+
 
 #ifdef ENCODER_ENABLE
 
