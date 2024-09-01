@@ -109,11 +109,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT(
-  _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
+  _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  RESET ,  RGB_TOG ,RGB_MOD,
   _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                        KC_PGUP, KC_PRVWD,   KC_UP, KC_NXTWD,KC_DLINE, KC_BSPC,
   _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, KC_CAPS,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_BSPC,
   _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND,   XXXXXXX, _______,
-                         _______, _______, _______, KC_LOWER, _______,       _______, KC_TRNS, _______, _______, _______
+                         _______, _______, _______, KC_0, _______,       _______, KC_TRNS, _______, _______, _______
 ),
 [_THIRD] = LAYOUT(
 XXXXXXX , KC_0,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
@@ -253,49 +253,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case KC_LOWER:
-            SEND_STRING("L");
             if (record->event.pressed) {
                 layer_on(_LOWER);
-                if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
-                    SEND_STRING("ont");
-                    layer_on(_THIRD);
-                } else {
-                    layer_off(_THIRD);
-                }
+                // if (IS_LAYER_ON(_RAISE)) {
+                //     layer_on(_THIRD);
+                //     SEND_STRING("cond");
+                // } else {
+                //     layer_on(_LOWER);
+                //     SEND_STRING("nocond");
+                // }
             } else {
+                // layer_off(_THIRD);
                 layer_off(_LOWER);
-                if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
-                    SEND_STRING("ont");
-                    layer_on(_THIRD);
-                } else {
-                    layer_off(_THIRD);
-                }
-
+                // SEND_STRING("nopressed");
             }
             return false;
         case KC_RAISE:
-            SEND_STRING("R");
             if (record->event.pressed) {
                 layer_on(_RAISE);
-                if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
-                    layer_off(_RAISE);
-                    layer_on(_THIRD);
-                } 
-                else {
-                    layer_off(_THIRD);
-                }
-
-            } else {
-                layer_off(_THIRD);
-                layer_off(_RAISE);
-                
-                // if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
-                //     SEND_STRING("ont");
+                // if (IS_LAYER_ON(_LOWER)) {
                 //     layer_on(_THIRD);
+                //     SEND_STRING("cond");
                 // } else {
-                //     layer_off(_THIRD);
+                //     layer_on(_RAISE);
+                //     SEND_STRING("nocond");
                 // }
 
+            } else {
+                // layer_off(_THIRD);
+                layer_off(_RAISE);
             }
             return false;
         case KC_THIRD:
