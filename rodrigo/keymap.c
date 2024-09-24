@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //---------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TD(TD_CAPLOCK), KC_Z,            KC_X,    KC_C,    KC_V,    KC_B,                 KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, KC_ENT,
   //---------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                            TD(TD_LGUICTRL), LOWER, HANDY,              KC_SPC, RAISE, KC_LALT
+                            TD(TD_LGUICTRL), LOWER, KC_SPC,              KC_SPC, RAISE, KC_LALT
                                       //|--------------------------|  |--------------------------|
 
 
@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      KC_LSFT, XXXXXXX, KC_F2, XXXXXXX, LALT(KC_F4), LALT(KC_D),                  RALT(KC_N), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OPEN_QS_MARK,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         RCTL(KC_F), KC_TRNS, HANDY,    XXXXXXX, RAISE, KC_RALT
+                                         RCTL(KC_F), KC_TRNS, KC_SPC,    XXXXXXX, RAISE, KC_RALT
                                       //|--------------------------|  |--------------------------|
   ),
 
