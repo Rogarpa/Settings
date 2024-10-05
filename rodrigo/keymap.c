@@ -111,13 +111,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
   [_HANDY] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-     XXXXXXX,  XXXXXXX,    LSFT(LALT(LCTL(KC_DOWN))), LSFT(LALT(LCTL(KC_UP))),    XXXXXXX,    XXXXXXX,                         XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX,
+     LCTL(LALT(KC_V)),  LCTL(KC_V),    LCTL(KC_PGUP), LCTL(KC_PGDN),    LSFT(LCTL(KC_I)),    KC_ENT,                         XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TG_ALTTAB, TG_WIN_MOVE_LEFT, TG_WIN_MOVE_DOWN, TG_WIN_MOVE_UP, TG_WIN_MOVE_RIGHT,XXXXXXX,                          XXXXXXX , KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      KC_LSFT, LGUI(LCTL(KC_LEFT)) , LALT(LCTL(KC_DOWN)), LALT(LCTL(KC_UP)), LGUI(LCTL(KC_RIGHT)),XXXXXXX,                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         XXXXXXX, KC_TRNS, KC_TRNS,    XXXXXXX, RAISE, XXXXXXX
+                                         LCTL(LALT(KC_C)), KC_TRNS, KC_TRNS,    XXXXXXX, RAISE, XXXXXXX
                                       //|--------------------------|  |--------------------------|
   ),
   [_ADJUST] = LAYOUT(
