@@ -111,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
   [_HANDY] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-     KC_PWR,  XXXXXXX,    LSFT(LALT(LCTL(KC_DOWN))), LSFT(LALT(LCTL(KC_UP))),    XXXXXXX,    XXXXXXX,                         XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX,
+     XXXXXXX,  XXXXXXX,    LSFT(LALT(LCTL(KC_DOWN))), LSFT(LALT(LCTL(KC_UP))),    XXXXXXX,    XXXXXXX,                         XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      TG_ALTTAB, TG_WIN_MOVE_LEFT, TG_WIN_MOVE_DOWN, TG_WIN_MOVE_UP, TG_WIN_MOVE_RIGHT,XXXXXXX,                          XXXXXXX , KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
